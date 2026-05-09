@@ -1,0 +1,70 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input">
+      <text class="search-icon">🔍</text>
+      <input type="text" placeholder="搜索商家或商品" bindconfirm="handleSearch" bindinput="onSearchInput" value="{{searchKey}}" focus="{{isSearching}}" />
+      <text class="search-clear" wx:if="{{searchKey}}" bindtap="clearSearch">✕</text>
+    </view>
+    <view class="search-btn" bindtap="handleSearch">搜索</view>
+  </view>
+
+  <!-- 搜索状态提示 -->
+  <view class="search-status" wx:if="{{isSearching}}">
+    <text>搜索 "{{searchKey}}" 的结果</text>
+    <text class="search-count" wx:if="{{merchants.length > 0}}">，共{{merchants.length}}个商家</text>
+  </view>
+
+  <!-- 轮播图 -->
+  <swiper class="banner" wx:if="{{!isSearching}}" indicator-dots="true" autoplay="true" circular="true">
+    <swiper-item wx:for="{{banners}}" wx:key="index">
+      <image src="{{item}}" mode="aspectFill" class="banner-img" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 分类导航 -->
+  <view class="category-nav" wx:if="{{!isSearching}}">
+    <view class="category-item" wx:for="{{categories}}" wx:key="index" bindtap="navigateToCategory" data-category="{{item}}">
+      <image src="{{item.icon}}" class="category-icon" />
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 商家列表 -->
+  <view class="merchant-section">
+    <view class="section-title">{{isSearching ? '搜索结果' : '推荐商家'}}</view>
+    <view class="merchant-list" wx:if="{{merchants.length > 0}}">
+      <view class="merchant-item" wx:for="{{merchants}}" wx:key="item.id" bindtap="navigateToMerchant" data-merchant-id="{{item.id}}">
+        <image src="{{item.logo || '/static/images/default-shop.png'}}" class="merchant-logo" />
+        <view class="merchant-info">
+          <view class="merchant-name">{{item.name}}</view>
+          <view class="merchant-rating">
+            <text class="rating-stars">⭐ {{item.rating}}</text>
+            <text class="sales">月售{{item.salesVolume || 0}}单</text>
+          </view>
+          <view class="merchant-delivery">
+            <text class="delivery-time">{{item.businessHours}}</text>
+            <text class="delivery-fee">配送费¥{{item.deliveryFee || 0}}</text>
+          </view>
+          <view class="merchant-tags">
+            <text class="tag" wx:if="{{item.minimumOrderAmount}}">起送¥{{item.minimumOrderAmount}}</text>
+            <text class="tag" wx:class="{{item.status === 1 ? 'tag-open' : 'tag-close'}}">
+              {{item.status === 1 ? '营业中' : '休息中'}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 空搜索结果 -->
+    <view class="empty-result" wx:if="{{isSearching && merchants.length === 0}}">
+      <text class="empty-icon">🔍</text>
+      <text class="empty-text">未找到相关商家</text>
+      <text class="empty-hint">换个关键词试试吧</text>
+    </view>
+    <!-- 空商家列表 -->
+    <view class="empty-result" wx:if="{{!isSearching && merchants.length === 0}}">
+      <text class="empty-icon">🏪</text>
+      <text class="empty-text">暂无商家</text>
+    </view>
+  </view>
+</view>
