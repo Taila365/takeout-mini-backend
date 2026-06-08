@@ -100,4 +100,4 @@ git commit -m "外卖全栈完整项目代码提交"
 git push -u origin main
 👨‍💻 作者信息
 全栈开发：Taila365
-项目仓库地址：https://github.com/Taila365/takeout-backend
+项目仓库地址：https://github.com/Taila365/takeout-mini-backend
