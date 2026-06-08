@@ -32,7 +32,11 @@
       </scroll-view>
 
       <!-- 右侧商品 -->
+<<<<<<< HEAD
       <scroll-view class="product-list" scroll-y :scroll-top="productListScrollTop" scroll-with-animation>
+=======
+      <scroll-view class="product-list" scroll-y>
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
         <view class="product-category-title">{{currentCategoryName}}</view>
         <view class="product-item" v-for="product in products" :key="product.id">
           <image :src="product.image || '/static/images/default-product.png'" class="product-img" mode="aspectFill" />
@@ -78,19 +82,31 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { merchantApi, productApi, cartApi, categoryApi } from '@/utils/api.js'
+=======
+import { merchantApi, productApi, cartApi } from '@/utils/api.js'
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
 
 export default {
   data() {
     return {
       merchantId: null,
       merchant: {},
+<<<<<<< HEAD
       categories: [{ id: 0, name: '全部' }],
       currentCategory: 0,
       products: [],
       /** 当前商家全部上架商品，供「全部」分类使用 */
       allOnSaleProducts: [],
       productListScrollTop: 0,
+=======
+      categories: [
+        { id: 0, name: '全部' }
+      ],
+      currentCategory: 0,
+      products: [],
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
       cart: {}
     }
   },
@@ -105,10 +121,17 @@ export default {
       return Object.values(this.cart).reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)
     }
   },
+<<<<<<< HEAD
   async onLoad(options) {
     this.merchantId = options.id
     await Promise.all([this.loadMerchantDetail(), this.loadCategoriesAndProducts()])
     await this.loadCart()
+=======
+    async onLoad(options) {
+    this.merchantId = options.id
+      await Promise.all([this.loadMerchantDetail(), this.loadProducts()])
+      await this.loadCart()
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
   },
   onShow() {
     if (this.merchantId && uni.getStorageSync('token')) {
@@ -139,6 +162,7 @@ export default {
         console.error('加载商家详情失败:', error)
       }
     },
+<<<<<<< HEAD
     // 加载左侧分类 + 默认「全部」上架商品
     async loadCategoriesAndProducts() {
       try {
@@ -184,6 +208,21 @@ export default {
       this.$nextTick(() => {
         this.productListScrollTop = 0
       })
+=======
+    // 加载商品列表
+    async loadProducts() {
+      try {
+        const res = await productApi.getOnSaleProducts(this.merchantId)
+        this.products = res.data || []
+      } catch (error) {
+        console.error('加载商品失败:', error)
+      }
+    },
+    // 选择分类
+    selectCategory(index) {
+      this.currentCategory = index
+      // 这里可以实现按分类筛选商品的逻辑
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
     },
     // 获取购物车中商品数量
     getCartQuantity(productId) {

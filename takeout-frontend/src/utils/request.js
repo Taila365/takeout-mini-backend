@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // API 基础地址：见 .env.development 中 VITE_API_BASE_URL；真机调试请改为电脑局域网 IP（如 http://192.168.1.8:8080/api）
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api'
+=======
+// API基础地址
+const BASE_URL = 'http://localhost:8080/api'
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
 
 // 请求封装
 const request = (options) => {

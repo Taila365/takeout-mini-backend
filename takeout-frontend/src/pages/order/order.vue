@@ -102,6 +102,7 @@ export default {
       pageSize: 10
     }
   },
+<<<<<<< HEAD
   async onShow() {
     const tabIndex = uni.getStorageSync('orderTabIndex')
     if (tabIndex !== '' && tabIndex != null) {
@@ -112,6 +113,10 @@ export default {
     }
 
     await this.loadOrders()
+=======
+  onLoad() {
+    this.loadOrders()
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
   },
   onPullDownRefresh() {
     this.page = 1
@@ -149,11 +154,17 @@ export default {
 
         this.hasMore = orders.length === this.pageSize
         this.loading = false
+<<<<<<< HEAD
         return filteredOrders
       } catch (error) {
         this.loading = false
         console.error('加载订单失败:', error)
         return []
+=======
+      } catch (error) {
+        this.loading = false
+        console.error('加载订单失败:', error)
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
       }
     },
     // 加载更多
@@ -179,10 +190,17 @@ export default {
       return order.items ? order.items.reduce((sum, item) => sum + item.quantity, 0) : 0
     },
     // 支付订单
+<<<<<<< HEAD
     async payOrder(order, payMethod = 'wechat') {
       try {
         uni.showLoading({ title: '支付中...' })
         const res = await orderApi.payOrder(order.id, payMethod)
+=======
+    async payOrder(order) {
+      try {
+        uni.showLoading({ title: '支付中...' })
+        const res = await orderApi.payOrder(order.id, 'wechat')
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
         uni.hideLoading()
 
         if (res.code === 200) {

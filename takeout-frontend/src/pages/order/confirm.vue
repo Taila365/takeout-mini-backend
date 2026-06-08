@@ -167,7 +167,11 @@ export default {
     },
     // 提交订单
     async submitOrder() {
+<<<<<<< HEAD
       if (!this.defaultAddress) { 
+=======
+      if (!this.defaultAddress) {
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
         uni.showToast({ title: '请选择收货地址', icon: 'none' })
         return
       }
@@ -206,16 +210,26 @@ export default {
           await cartApi.clearCart(this.merchantId)
           uni.removeStorageSync('checkoutItems')
           
+<<<<<<< HEAD
           uni.setStorageSync('orderTabIndex', 1)
 
+=======
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
           uni.showToast({
             title: '订单创建成功',
             icon: 'success'
           })
 
+<<<<<<< HEAD
           setTimeout(() => {
             uni.switchTab({
               url: '/pages/order/order'
+=======
+          // 跳转到支付页面或订单详情
+          setTimeout(() => {
+            uni.redirectTo({
+              url: `/pages/order/order`
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
             })
           }, 1500)
         } else {

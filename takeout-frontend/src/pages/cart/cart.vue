@@ -111,11 +111,19 @@ export default {
         const merchantOptions = []
 
         for (const merchant of merchants) {
+<<<<<<< HEAD
           const res = await cartApi.getCartList(merchant.merchantId)
           if ((res.data || []).length > 0) {
             merchantOptions.push({
               id: merchant.merchantId,
               name: merchant.name || `商家${merchant.merchantId}`
+=======
+          const res = await cartApi.getCartList(merchant.id)
+          if ((res.data || []).length > 0) {
+            merchantOptions.push({
+              id: merchant.id,
+              name: merchant.name || `商家${merchant.id}`
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
             })
           }
         }

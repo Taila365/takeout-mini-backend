@@ -16,17 +16,23 @@ export const merchantApi = {
   getAllMerchants: () => get('/merchant/list'),
   // 获取营业中的商家
   getOpenMerchants: () => get('/merchant/open'),
+<<<<<<< HEAD
   /** 按商家经营类目筛选（与数据库 merchant.category 字段一致，如：美食、超市） */
   getMerchantsByCategory: (category) => get('/merchant/category', { category }),
+=======
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
   // 获取商家详情
   getMerchantById: (id) => get(`/merchant/detail/${id}`)
 }
 
+<<<<<<< HEAD
 // 商品分类（CategoryController）
 export const categoryApi = {
   getCategoriesByMerchantId: (merchantId) => get(`/category/merchant/${merchantId}`)
 }
 
+=======
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
 // 商品相关接口
 export const productApi = {
   // 获取商家商品列表
@@ -39,6 +45,7 @@ export const productApi = {
   getProductById: (id) => get(`/product/detail/${id}`)
 }
 
+<<<<<<< HEAD
 // 购物车：对齐后端 CartController（Redis，需登录 token）
 // POST /cart/add | POST /cart/subtract | GET /cart/list | GET /cart/summary | DELETE /cart/clear
 export const cartApi = {
@@ -51,6 +58,19 @@ export const cartApi = {
   /** CartController.summary — query merchantId */
   getCartSummary: (merchantId) => get('/cart/summary', { merchantId }),
   /** CartController.clear — query merchantId（小程序 DELETE 用 query 传参） */
+=======
+// 购物车相关接口
+export const cartApi = {
+  // 添加商品
+  addItem: (merchantId, productId, count = 1) => post('/cart/add', { merchantId, productId, count }),
+  // 减少商品
+  subtractItem: (merchantId, productId, count = 1) => post('/cart/subtract', { merchantId, productId, count }),
+  // 购物车明细
+  getCartList: (merchantId) => get('/cart/list', { merchantId }),
+  // 购物车汇总
+  getCartSummary: (merchantId) => get('/cart/summary', { merchantId }),
+  // 清空购物车（query 传参，兼容小程序 DELETE 与 Spring @RequestParam）
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
   clearCart: (merchantId) => del(`/cart/clear?merchantId=${encodeURIComponent(merchantId)}`)
 }
 
@@ -62,10 +82,17 @@ export const orderApi = {
   getUserOrders: () => get('/order/user/list'),
   // 获取订单详情
   getOrderDetail: (orderId) => get(`/order/detail/${orderId}`),
+<<<<<<< HEAD
   // 支付订单（后端 @RequestParam，需走 query）
   payOrder: (orderId, payMethod) => put(`/order/pay/${orderId}?payMethod=${encodeURIComponent(payMethod)}`),
   // 取消订单
   cancelOrder: (orderId, cancelReason) => put(`/order/cancel/${orderId}?cancelReason=${encodeURIComponent(cancelReason)}`)
+=======
+  // 支付订单
+  payOrder: (orderId, payMethod) => put(`/order/pay/${orderId}`, { payMethod }),
+  // 取消订单
+  cancelOrder: (orderId, cancelReason) => put(`/order/cancel/${orderId}`, { cancelReason })
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
 }
 
 // 地址相关接口

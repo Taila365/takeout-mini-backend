@@ -17,6 +17,7 @@
 
     <!-- 分类导航 -->
     <view class="category-nav">
+<<<<<<< HEAD
       <view
         class="category-item"
         :class="{ active: activeCategoryIndex === index }"
@@ -24,6 +25,9 @@
         :key="index"
         @click="navigateToCategory(item, index)"
       >
+=======
+      <view class="category-item" v-for="(item, index) in categories" :key="index" @click="navigateToCategory(item)">
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
         <image :src="item.icon" class="category-icon" />
         <text class="category-name">{{item.name}}</text>
       </view>
@@ -33,7 +37,11 @@
     <view class="merchant-section">
       <view class="section-title">推荐商家</view>
       <view class="merchant-list">
+<<<<<<< HEAD
         <view class="merchant-item" v-for="(merchant, index) in merchants" :key="merchant.merchantId" @click="navigateToMerchant(merchant.merchantId)">
+=======
+        <view class="merchant-item" v-for="(merchant, index) in merchants" :key="merchant.id" @click="navigateToMerchant(merchant.id)">
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
           <image :src="merchant.logo || '/static/images/default-shop.png'" class="merchant-logo" />
           <view class="merchant-info">
             <view class="merchant-name">{{merchant.name}}</view>
@@ -80,8 +88,11 @@ export default {
         { name: '烧烤', icon: '/static/images/bbq.png' },
         { name: '全部', icon: '/static/images/all.png' }
       ],
+<<<<<<< HEAD
       /** 当前选中的首页类目索引，用于高亮 */
       activeCategoryIndex: 7,
+=======
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
       merchants: []
     }
   },
@@ -93,7 +104,11 @@ export default {
     uni.stopPullDownRefresh()
   },
   methods: {
+<<<<<<< HEAD
     // 加载商家列表（营业中全部）
+=======
+    // 加载商家列表
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
     async loadMerchants() {
       try {
         uni.showLoading({ title: '加载中...' })
@@ -105,6 +120,7 @@ export default {
         console.error('加载商家失败:', error)
       }
     },
+<<<<<<< HEAD
     /** 按经营类目加载商家（对应后端 GET /merchant/category?category=） */
     async loadMerchantsByCategory(categoryName) {
       try {
@@ -117,6 +133,8 @@ export default {
         console.error('按分类加载商家失败:', error)
       }
     },
+=======
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
     // 搜索
     handleSearch() {
       if (!this.searchKey.trim()) {
@@ -126,6 +144,7 @@ export default {
       // 实现搜索逻辑
       uni.showToast({ title: '搜索功能开发中', icon: 'none' })
     },
+<<<<<<< HEAD
     // 首页分类：全部 → 营业商家列表；其它 → 与 merchant.category 字段匹配的商家
     navigateToCategory(category, index) {
       this.activeCategoryIndex = index
@@ -134,6 +153,11 @@ export default {
       } else {
         this.loadMerchantsByCategory(category.name)
       }
+=======
+    // 跳转到分类
+    navigateToCategory(category) {
+      uni.showToast({ title: `${category.name}分类开发中`, icon: 'none' })
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
     },
     // 跳转到商家详情
     navigateToMerchant(merchantId) {
@@ -198,11 +222,14 @@ export default {
   padding: 20rpx 0;
 }
 
+<<<<<<< HEAD
 .category-item.active .category-name {
   color: #667eea;
   font-weight: bold;
 }
 
+=======
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
 .category-icon {
   width: 80rpx;
   height: 80rpx;

@@ -106,6 +106,7 @@ export default {
         console.error('加载用户信息失败:', error)
       }
     },
+<<<<<<< HEAD
     // 登录（uni.login 的 success 若用 async，部分端上 finally 时机异常，改为同步 success + 单独 async 方法，保证 showLoading/hideLoading 配对）
     login() {
       uni.showLoading({ title: '登录中...' })
@@ -113,6 +114,37 @@ export default {
         provider: 'weixin',
         success: (loginRes) => {
           this.afterWxLogin(loginRes)
+=======
+    // 登录
+    login() {
+      uni.showLoading({ title: '登录中...' })
+      
+      // 调用微信登录
+      uni.login({
+        provider: 'weixin',
+        success: async (loginRes) => {
+          try {
+            if (!loginRes.code) {
+              uni.showToast({ title: '未获取到登录 code', icon: 'none' })
+              return
+            }
+            const res = await userApi.login(loginRes.code)
+            if (res.code === 200) {
+              uni.setStorageSync('token', res.data.token)
+              uni.setStorageSync('userInfo', res.data.user)
+              this.isLogin = true
+              this.userInfo = res.data.user
+              uni.showToast({ title: '登录成功', icon: 'success' })
+            } else {
+              uni.showToast({ title: res.msg || '登录失败', icon: 'none' })
+            }
+          } catch (error) {
+            console.error('登录失败:', error)
+            uni.showToast({ title: '登录失败', icon: 'none' })
+          } finally {
+            uni.hideLoading()
+          }
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
         },
         fail: () => {
           uni.hideLoading()
@@ -120,6 +152,7 @@ export default {
         }
       })
     },
+<<<<<<< HEAD
     async afterWxLogin(loginRes) {
       try {
         if (!loginRes.code) {
@@ -143,6 +176,8 @@ export default {
         uni.hideLoading()
       }
     },
+=======
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
     // 选择头像
     chooseAvatar() {
       uni.chooseImage({

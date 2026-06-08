@@ -1,0 +1,55 @@
+# 服务器配置
+server:
+  port: 8080  # 后端端口，小程序访问用
+  servlet:
+    context-path: /api  # 接口统一前缀：http://localhost:8080/api/xxx
+
+# Spring配置
+spring:
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/takeout?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root  # 你的MySQL账号
+    password: 123456 # 你的MySQL密码
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+  # 文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  # mapper.xml文件路径
+  type-aliases-package: com.takeout.entity  # 实体类别名
+  configuration:
+    map-underscore-to-camel-case: true  # 下划线转驼峰
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL
+
+# Knife4j(Swagger)配置
+knife4j:
+  enable: true
+  openapi:
+    title: 外卖小程序后端API文档
+    description: 微信小程序外卖接口文档
+    email: 123@qq.com
+    concat: 开发者
+    version: 1.0.0
+    license: Apache 2.0
+    license-url: https://apache.org
+
+# JWT配置
+jwt:
+  secret: 387d122e8d1e482b9541d7c22c28d1078d1e482b9541d7c22c28d107  # 密钥（自定义）
+  expire: 7  # 过期时间：天
+
+# 微信小程序（登录 jscode2session；secret 建议用环境变量 WECHAT_MINI_SECRET）
+wechat:
+  miniprogram:
+    appid: ${WECHAT_MINI_APPID:}
+    secret: ${WECHAT_MINI_SECRET:}

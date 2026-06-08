@@ -1,6 +1,10 @@
 {
   "name": "外卖小程序",
+<<<<<<< HEAD
   "appid": "wx70a108ff8fd5fcd3",
+=======
+  "appid": "__UNI__XXXXXXX",
+>>>>>>> e4fada038ccf8970bdc77b7679babc05e46a3366
   "description": "外卖点餐小程序",
   "versionName": "1.0.0",
   "versionCode": "100",
