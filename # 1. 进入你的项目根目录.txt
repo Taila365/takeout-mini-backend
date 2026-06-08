@@ -1,0 +1,39 @@
+# 1. 进入你的项目根目录
+cd C:/Users/qiuzijian/Downloads/takeout-backend
+
+# 2. 初始化Git
+git init
+
+# 3. 添加所有文件
+git add .
+
+# 4. 提交
+git commit -m "首次提交：外卖后端项目"
+
+# 5. 关联你的GitHub仓库（⚠️ 这行必须替换成你自己的仓库地址）
+git remote add origin https://github.com/你的用户名/takeout-backend.git
+
+# 6. 设置主分支
+git branch -M main
+
+# 7. 推送到GitHub
+git push -u origin main
+
+
+————————————————————————————————————+————————
+git add .
+git commit -m "你的提交说明"
+git pull origin main  # 先拉取
+git push              # 再推送
+
+
+mvn clean package -DskipTests
+
+
+
+docker build -t backend-service:1.0 .
+
+
+docker run -d -p 8080:8080 --name backend backend-service:1.0
+
+npm run dev
